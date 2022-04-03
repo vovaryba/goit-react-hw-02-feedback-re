@@ -1,0 +1,11 @@
+.line:nth-child(2n) {
+  background-color: #f7f3f5;
+}
+.cell {
+  width: 33%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: solid 1px #000000;
+  color: #898e8e;
+  text-transform: capitalize;
+}

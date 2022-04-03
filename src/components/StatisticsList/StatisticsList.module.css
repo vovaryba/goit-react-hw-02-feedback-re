@@ -1,0 +1,10 @@
+.statList {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+
+  padding-left: 0;
+  /* border-top: 1px solid #000000; */
+  font-size: 12px;
+}

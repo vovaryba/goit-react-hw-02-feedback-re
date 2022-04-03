@@ -1,0 +1,25 @@
+.item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.item:not(:last-child) {
+  margin-bottom: 10px;
+}
+.status {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.avatar {
+  margin-right: 10px;
+}
+.name {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
