@@ -1,31 +1,51 @@
-import Profile from 'components/Profile/Profile';
-import user from 'components/Profile/user.json';
-import Container from 'components/Container/Container';
-import StatisticsList from 'components/StatisticsList/StatisticsList';
-import data from 'components/StatisticsList/data.json';
-import FriendList from 'components/FriendList/FriendList';
-import friends from 'components/FriendList/friends.json';
-import TransactionHistory from 'components/TransactionHistory/TransactionHistory';
-import transactions from 'components/TransactionHistory/transactions.json';
+import { Component } from 'react';
+import Container from 'components/Container';
+import FeedbackOptions from 'components/FeedbackOptions';
+import Statistics from 'components/Statistics';
 
-function App() {
-  return (
-    <>
-      <Profile
-        username={user.username}
-        tag={user.tag}
-        location={user.location}
-        avatar={user.avatar}
-        stats={user.stats}
-      />
-      <Container>
-        <StatisticsList title="Upload stats" stats={data} />
-        <StatisticsList stats={data} />
-      </Container>
-      <FriendList friends={friends} />
-      <TransactionHistory transactions={transactions} />
-    </>
-  );
+const REVIEWS = ['good', 'neutral', 'bad'];
+
+class App extends Component {
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
+
+  handleIncrementReview = ({ target }) => {
+    console.log(target.name);
+    const feedback = target.name;
+    this.setState(prevState => ({
+      [feedback]: prevState[feedback] + 1,
+    }));
+  };
+
+  render() {
+    const total = this.state.good + this.state.neutral + this.state.bad;
+    let persentagePositiveFeedback = Math.round(
+      (this.state.good / total) * 100,
+    );
+    return (
+      <>
+        <Container title="Please leave feedback">
+          <FeedbackOptions
+            options={REVIEWS}
+            onLeaveFeedback={this.handleIncrementReview}
+          />
+        </Container>
+
+        <Container title="Statistics">
+          <Statistics
+            good={this.state.good}
+            neutral={this.state.neutral}
+            bad={this.state.bad}
+            total={total}
+            positivePercentage={persentagePositiveFeedback}
+          />
+        </Container>
+      </>
+    );
+  }
 }
 
 export default App;

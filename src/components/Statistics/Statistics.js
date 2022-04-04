@@ -1,21 +1,31 @@
 import PropTypes from 'prop-types';
+import Notification from 'components/Notification';
 import s from './Statistics.module.css';
 
-function Statistics({ label, value }) {
-  const generateColor = () => {
-    return '#' + Math.floor(Math.random() * 16777215).toString(16);
-  };
-  return (
-    <li className={s.item} style={{ backgroundColor: generateColor() }}>
-      <span className={s.label}>{label}</span>
-      <span className={s.percentage}>{value}%</span>
-    </li>
-  );
-}
+const Statistics = ({ good, neutral, bad, total, positivePercentage }) => (
+  <>
+    {total ? (
+      <>
+        <p className={s.feedbackCounter}>Good: {good}</p>
+        <p className={s.feedbackCounter}>Neutral: {neutral}</p>
+        <p className={s.feedbackCounter}>Bad: {bad}</p>
+        <p className={s.feedbackCounter}>Total: {total} </p>
+        <p className={s.feedbackCounter}>
+          Positive feedback: {positivePercentage ? positivePercentage : 0}%
+        </p>
+      </>
+    ) : (
+      <Notification message="There is no feedback" />
+    )}
+  </>
+);
 
 Statistics.propTypes = {
-  label: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  positivePercentage: PropTypes.number.isRequired,
 };
 
 export default Statistics;
