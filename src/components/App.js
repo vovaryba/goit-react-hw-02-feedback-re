@@ -13,7 +13,6 @@ class App extends Component {
   };
 
   handleIncrementReview = ({ target }) => {
-    console.log(target.name);
     const feedback = target.name;
     this.setState(prevState => ({
       [feedback]: prevState[feedback] + 1,
@@ -21,10 +20,9 @@ class App extends Component {
   };
 
   render() {
-    const total = this.state.good + this.state.neutral + this.state.bad;
-    let persentagePositiveFeedback = Math.round(
-      (this.state.good / total) * 100,
-    );
+    const { good, neutral, bad } = this.state;
+    const total = good + neutral + bad;
+    const persentagePositiveFeedback = Math.round((good / total) * 100);
     return (
       <>
         <Container title="Please leave feedback">
@@ -36,9 +34,9 @@ class App extends Component {
 
         <Container title="Statistics">
           <Statistics
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
+            good={good}
+            neutral={neutral}
+            bad={bad}
             total={total}
             positivePercentage={persentagePositiveFeedback}
           />
